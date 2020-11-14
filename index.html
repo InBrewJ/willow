@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+    <meta content="utf-8" http-equiv="encoding" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+    />
+    <link rel="stylesheet" href="styles/style.css" />
+  </head>
+  <body>
+    <h3 class="ui center aligned header" style="margin-top: 2em">
+      Willow was born on <span id="willow-birthday">x</span>
+    </h3>
+    <h4 class="ui center aligned header">
+      <i>And it was a glorious day, make no mistake</i>
+    </h4>
+    <h2 class="ui center aligned header">That is...</h2>
+    <div class="ui text container">
+      <div class="ui segments">
+        <div class="ui segment">
+          she is <span id="total-years">x</span> years old
+        </div>
+        <div class="ui segment">
+          she is <span id="total-months">x</span> months old
+        </div>
+        <div class="ui segment">
+          she is <span id="total-days">x</span> days old
+        </div>
+      </div>
+      <div>
+        <div style="margin: 0 auto; width: 40vw">
+          <img
+            class="ui fluid image center-img"
+            src="img/willow/why_u_wake_me_up.jpg"
+            alt="willow-why-wake-me"
+          />
+        </div>
+      </div>
+    </div>
+    <script
+      src="https://code.jquery.com/jquery-3.1.1.min.js"
+      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+    <script src="scripts/js/birthday.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        var $headers = $("body > h3"),
+          $header = $headers.first(),
+          ignoreScroll = false,
+          timer;
+
+        // Preserve example in viewport when resizing browser
+        $(window).on("resize", function () {
+          // ignore callbacks from scroll change
+          clearTimeout(timer);
+          $headers.visibility("disable callbacks");
+
+          // preserve position
+          $(document).scrollTop($header.offset().top);
+
+          // allow callbacks in 500ms
+          timer = setTimeout(function () {
+            $headers.visibility("enable callbacks");
+          }, 500);
+        });
+        $headers.visibility({
+          // fire once each time passed
+          once: false,
+
+          // don't refresh position on resize
+          checkOnRefresh: true,
+
+          // lock to this element on resize
+          onTopPassed: function () {
+            $header = $(this);
+          },
+          onTopPassedReverse: function () {
+            $header = $(this);
+          },
+        });
+      });
+    </script>
+  </body>
+</html>
